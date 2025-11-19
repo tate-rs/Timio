@@ -1,11 +1,10 @@
-use std::collections::BTreeMap;
 use std::str::FromStr;
 
 use crate::model::{FinishedEntry, RunningEntry};
 use crate::store::{Persistence, Result, StoreError};
 use async_trait::async_trait;
 use chrono::{DateTime, Local, NaiveDate, NaiveTime};
-use sqlx::{Execute, Row, SqlitePool};
+use sqlx::{Row, SqlitePool};
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions};
 use sqlx::migrate::Migrator;
 
@@ -140,10 +139,6 @@ impl Persistence for SqliteStore {
             .collect();
 
         Ok(entries)
-    }
-
-    async fn monthly_finished_list(&self, from: Option<NaiveDate>, to: Option<NaiveDate>) -> BTreeMap<NaiveDate, FinishedEntry> {
-        todo!()
     }
 
     async fn start(&self, project: String, description: Option<String>, started_at: Option<i64>) -> Result<()> {

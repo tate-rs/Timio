@@ -53,6 +53,9 @@ impl TimeTracker {
     pub async fn stop(&mut self, name: impl ToString) -> Result<FinishedEntry, TrackerError> {
         let name = name.to_string();
 
+        // TODO split time in between span of days 
+        //  -> working on something that overlaps with the next day - split it into two days.
+
         if let Some(running) = self.running.remove(&name) {
             let finished = running.finish(Local::now());
             self.uncommited_finished.insert(name, finished.clone());

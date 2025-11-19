@@ -18,9 +18,6 @@ pub trait Persistence: Send + Sync {
     async fn running_list(&self) -> Result<Vec<RunningEntry>>;
     async fn finished_list(&self, from: Option<NaiveDate>, to: Option<NaiveDate>) -> Result<Vec<FinishedEntry>>;
 
-    async fn monthly_finished_list(&self, from: Option<NaiveDate>, to: Option<NaiveDate>) -> BTreeMap<NaiveDate, FinishedEntry>;
-    // async fn monthly_finished_list(&self, from: Option<NaiveDate>, to: Option<NaiveDate>) -> BTreeMap<NaiveDate, FinishedEntry>;
-
     /// Start tracking; implicitly creates the project if it does not exist.
     async fn start(&self, project: String, description: Option<String>, started_at: Option<i64>) -> Result<()>;
 
